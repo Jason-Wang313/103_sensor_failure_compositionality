@@ -1,0 +1,6 @@
+ablation,combined_stress_mean_success,ci95_success,interpretation
+full_proposed_branch_mechanism,0.6519,0.0111,all components
+minus_branch_atlas,0.5460,0.0137,removes explicit unrealized futures
+minus_tail_risk_objective,0.5779,0.0157,uses mean predicted value only
+minus_diagnostic_probe,0.5957,0.0177,does not actively test ambiguous physical modes
+minus_failure_memory,0.6079,0.0077,does not reuse repaired beliefs
