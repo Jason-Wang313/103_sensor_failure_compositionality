@@ -1,0 +1,9 @@
+case_id,task,family,proposed_success,strongest_baseline,baseline_success,success_gap,proposed_safety_violation,proposed_damage,lesson
+1,tool_use_contact_control,vision_only,0.5612,bayesian_sensor_fusion_monitor,0.5629,-0.0017,0.1582,0.1105,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+2,insertion_alignment,vision_only,0.5289,bayesian_sensor_fusion_monitor,0.5255,0.0034,0.1684,0.0935,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+3,mobile_manip_near_obstacles,proprioception_only,0.5629,bayesian_sensor_fusion_monitor,0.5459,0.0170,0.1480,0.1156,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+4,mobile_manip_near_obstacles,tactile_only,0.6105,bayesian_sensor_fusion_monitor,0.5901,0.0204,0.1769,0.1344,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+5,insertion_alignment,proprioception_only,0.5493,bayesian_sensor_fusion_monitor,0.5272,0.0221,0.1582,0.1071,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+6,grasp_selection,force_torque_only,0.5714,bayesian_sensor_fusion_monitor,0.5476,0.0238,0.1599,0.1259,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+7,deformable_handling,depth_only,0.5629,bayesian_sensor_fusion_monitor,0.5323,0.0306,0.1701,0.1173,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction
+8,insertion_alignment,tactile_only,0.5952,bayesian_sensor_fusion_monitor,0.5578,0.0374,0.1514,0.1105,composition helps least when a robust single-sensor fallback can safely abstain without diagnosing the interaction

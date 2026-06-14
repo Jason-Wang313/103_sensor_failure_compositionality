@@ -1,26 +1,22 @@
-        # Hostile Reviewer Response
+# Hostile Reviewer Response
 
-        Paper: 103 Sensor Failure Compositionality
+Paper: 103 Sensor Failure Compositionality
 
-        ## Strongest Technical Threats
-        - Red-Teaming Vision-Language-Action Models via Quality Diversity Prompt Generation for Robust Robot Policies (2026)
-- When Vision Overrides Language: Evaluating and Mitigating Counterfactual Failures in VLAs (2026)
-- Development of compositionality through interactive learning of language and action of robots (2025)
-- PolyTouch: A Robust Multi-Modal Tactile Sensor for Contact-rich Manipulation Using Tactile-Diffusion Policies (2025)
-- REFLEX Dataset: A Multimodal Dataset of Human Reactions to Robot Failures and Explanations (2025)
-- Scaling Cross-Environment Failure Reasoning Data for Vision-Language Robotic Manipulation (2025)
-- Segmentation Model Benchmarking: A Strategic Prerequisite for Robust Geospatial Foundation Models (n.d.)
-- VLA-MP: A Vision-Language-Action Framework for Multimodal Perception and Physics-Constrained Action Generation in Autonomous Driving (2025)
+## Strongest Technical Threats
 
-        ## ICLR Main Response
-        A hostile ICLR reviewer would be correct to reject this as a main-conference submission. The v2 paper has reproducible synthetic evidence and careful limitations, but it does not contain the real robot, high-fidelity simulator, learned model, or manual related-work depth needed for the ICLR main track.
+- Sensor dropout and masked-modality training already target policies that survive missing sensors.
+- Multimodal manipulation-failure detectors such as FINO-Net already detect failures from robot sensory streams.
+- Conformal and uncertainty-aware robot safety methods already calibrate alarms under uncertainty.
+- Multi-modal tactile and autonomous-driving sensor-fusion systems already show robust behavior under missing or degraded modalities.
 
-        ## Honest Action
-        The paper is marked `KILL_ARCHIVE`. This avoids converting a generated workshop-style idea into an overstated main-conference claim.
+## ICLR Main Response
 
-        ## What Would Be Needed To Revive
-        - Real robot or high-fidelity benchmark experiments.
-        - Implemented model and baselines, not synthetic probability tables.
-        - Manual full-paper related-work audit.
-        - Paper-specific writing and figures.
-        - Evidence that the core mechanism is learned and useful under deployment shift.
+The v4 rebuild narrows the novelty boundary to compositional failure interactions: cases where single-sensor robustness or independent fault detectors cannot explain the combined failure. The local benchmark supports that boundary: proposed combined-stress success is `0.607 +/- 0.006` versus `0.544 +/- 0.006` for the strongest non-oracle baseline, with lower safety violation and damage.
+
+## Remaining Hostile Review
+
+A hostile reviewer would still be correct to reject a main-track submission today. The evidence is local and synthetic; the baselines are executable diagnostic models rather than external robot systems; and there is no real robot or independently validated high-fidelity simulator evidence.
+
+## Honest Action
+
+The paper is marked `STRONG_REVISE`. Continue only if the next version adds real robot or high-fidelity external validation and implemented learned baselines.
