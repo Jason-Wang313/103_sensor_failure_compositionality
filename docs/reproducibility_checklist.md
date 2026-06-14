@@ -1,19 +1,33 @@
 # Reproducibility Checklist
 
-## What Reproduces
+## Reproduces Locally
+
+- [x] `python -m py_compile src/run_experiment.py`
 - [x] `python src/run_experiment.py`
+- [x] `results/seed_task_family_metrics.csv`
+- [x] `results/per_task_family_metrics.csv`
+- [x] `results/seed_split_metrics.csv`
 - [x] `results/metrics.csv`
-- [x] `results/raw_seed_metrics.csv`
+- [x] `results/pairwise_stats.csv`
+- [x] `results/ablation_seed_metrics.csv`
+- [x] `results/ablation_task_family_seed_metrics.csv`
 - [x] `results/ablation_metrics.csv`
+- [x] `results/stress_sweep_seed_metrics.csv`
 - [x] `results/stress_sweep.csv`
-- [x] `results/negative_cases.csv`
+- [x] `results/failure_cases.csv`
+- [x] `figures/sensor_failure_combined_success.png`
+- [x] `figures/sensor_failure_diagnostics.png`
+- [x] `figures/sensor_failure_safety_regret.png`
+- [x] `figures/sensor_failure_stress_sweep.png`
+- [x] `figures/sensor_failure_ablation.png`
 - [x] `paper/main.tex`
 - [x] Canonical PDF: `C:/Users/wangz/Downloads/103.pdf`
 
-## What Does Not Reproduce
-- [ ] Real robot results.
-- [ ] High-fidelity benchmark runs.
-- [ ] Trained WAM checkpoints.
-- [ ] Competing learned baselines.
+## Does Not Yet Reproduce
 
-This is reproducible as an archive memo and synthetic stress test, not as an ICLR-main robotics system paper.
+- [ ] Real robot results.
+- [ ] Independent high-fidelity simulator runs.
+- [ ] Trained policy checkpoints.
+- [ ] Real deployment videos.
+
+This repository reproduces a v4 strong-revise evidence package, not a finished ICLR-main submission.

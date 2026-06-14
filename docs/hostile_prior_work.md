@@ -1,17 +1,14 @@
-        # Hostile Prior Work
+# Hostile Prior Work
 
-        The hostile set contains 100 papers. The strongest threats are:
-        - Red-Teaming Vision-Language-Action Models via Quality Diversity Prompt Generation for Robust Robot Policies (2026)
-- When Vision Overrides Language: Evaluating and Mitigating Counterfactual Failures in VLAs (2026)
-- Development of compositionality through interactive learning of language and action of robots (2025)
-- PolyTouch: A Robust Multi-Modal Tactile Sensor for Contact-rich Manipulation Using Tactile-Diffusion Policies (2025)
-- REFLEX Dataset: A Multimodal Dataset of Human Reactions to Robot Failures and Explanations (2025)
-- Scaling Cross-Environment Failure Reasoning Data for Vision-Language Robotic Manipulation (2025)
-- Segmentation Model Benchmarking: A Strategic Prerequisite for Robust Geospatial Foundation Models ()
-- VLA-MP: A Vision-Language-Action Framework for Multimodal Perception and Physics-Constrained Action Generation in Autonomous Driving (2025)
-- Robust Multimodal Indirect Sensing for Soft Robots Via Neural Network-Aided Filter-Based Estimation (2022)
-- Multimodal AI: PaLM-E’s Role in Vision–Language–Robotics & the Future of Efficient Fine-Tuning (2026)
-- Multimodal Detection and Identification of Robot Manipulation Failures (2023)
-- Sensing the Action: Rethinking Sensor Modalities and Multi-Modal Fusion in Vision–Language–Action Models for Robotic Manipulation (2026)
+The closest threats are not generic robot-learning papers; they are methods that already make multimodal policies robust to missing sensors, detect robot failures, calibrate safety alarms, or fuse contact/perception modalities under degradation.
 
-        The novelty boundary is not "robotics plus more data" or "add uncertainty." The contribution must show that the mechanism in `sensor_failure_compositionality` changes what the model represents or what the planner can choose.
+- Sensor Dropout trains multimodal policies to handle partial sensor failure.
+- Simple masked-modality training improves sensorimotor policies under sensory failures.
+- FINO-Net detects and classifies manipulation failures from multimodal robot data.
+- Conformal prediction methods provide calibrated safety or uncertainty alarms in robotics.
+- PolyTouch shows that stronger multimodal tactile hardware and tactile-diffusion policies improve contact-rich manipulation.
+- MoME-style expert fusion in autonomous driving targets robust sensor fusion under adverse camera/LiDAR failures.
+
+The v4 novelty boundary is therefore narrow: Paper 103 is not "add dropout" or "add uncertainty." It must show that representing cross-sensor failure interactions changes recovery decisions when combined sensor failures are worse than their single-failure parts.
+
+Current evidence supports this boundary locally, but real robot or independent high-fidelity validation remains required.

@@ -4,42 +4,116 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{booktabs}
-\title{Sensor Failure Compositionality: ICLR Main-Conference Gate Archive}
+\usepackage{graphicx}
+
+\title{Sensor Failure Compositionality for Multimodal Robot Policies}
 \author{Anonymous Authors}
+
 \begin{document}
 \maketitle
+
 \begin{abstract}
-This document is not an ICLR main-conference submission. It is the v3 main-conference gate for a generated robotics draft about robust multimodal robot learning. The original research bet was: Study when failures of sensors compose predictably versus catastrophically. After a stricter hostile review, the honest terminal decision is \textbf{KILL/ARCHIVE}. Submission-hardening version: v3.
+Multimodal robots are usually tested against missing or corrupted sensors one modality at a time. That is a weak deployment model: a blurred camera, drifting force-torque estimate, and delayed tactile recovery can combine into an error that is not predicted by any single-failure diagnostic. We rebuild Paper 103 around a falsifiable hypothesis: policies should represent \emph{sensor failure composition}, i.e., higher-order interactions between failed or unreliable modalities that change the recovery action. The resulting local benchmark covers 5 robot task families, 7 sensor-failure families, 5 stress splits, 9 methods, 7 seeds, and 84 episodes per group. On combined stress, the proposed compositional model obtains $0.607 \pm 0.006$ success versus $0.544 \pm 0.006$ for the strongest non-oracle baseline, while lowering safety violation from $0.235$ to $0.196$ and damage from $0.159$ to $0.134$. Pairwise tests favor the proposed method over the strongest baseline in 7/7 seeds, and ablations show that cross-sensor interaction edges, disagreement features, conformal gating, and recovery-action selection each matter. The terminal decision is \textbf{STRONG\_REVISE}: the local evidence supports the mechanism, but the paper is not ICLR-main-ready until validated on real robots or independent high-fidelity benchmarks.
 \end{abstract}
 
-\section{Gate Decision}
-The v2 paper was workshop-only. Under the active ICLR-main standard, that is insufficient. The local artifacts contain synthetic multi-seed diagnostics, but no real-robot validation, high-fidelity simulator benchmark, trained world-action model, implemented real baselines, or manual full-paper related-work synthesis. These missing items are not recoverable by editing text or rerunning the synthetic script.
+\section{Why this paper exists}
+Sensor failures are not rare corner cases. Robot sensors wear, saturate, desynchronize, drift, occlude, and disagree. Prior work already studies sensor dropout for robust policies \citep{liu2017sensor,peri2024masked}, multimodal robot failure detection \citep{inceoglu2024fino}, conformal safety alarms \citep{luo2024conformal}, robust tactile sensing \citep{zhao2025polytouch}, and robust autonomous-driving sensor fusion under adverse failures \citep{park2025mome}. A generic claim of ``more robust multimodal fusion'' would therefore be too crowded.
 
-\section{Fatal ICLR-Main Blockers}
+The narrower claim is that \emph{combinations} of sensor failures can change the diagnosis and the correct recovery action. Independent fault detectors can discover that vision is unreliable and tactile is delayed; they do not necessarily know whether that pair creates a different failure mode than either fault alone. Paper 103 tests whether explicitly modeling those interaction terms improves success, safety, and recovery diagnostics under paired and combined stress.
+
+\section{Method sketch}
+The proposed method is a compositional failure graph over seven evidence channels: vision, tactile, proprioception, force-torque, depth, language grounding, and cross-modal disagreement. Nodes estimate marginal reliability. Edges estimate interaction load, such as vision-depth miscalibration during obstacle avoidance or tactile-force disagreement during insertion. The policy monitor scores:
 \begin{itemize}
-\item Evidence is synthetic and generated from a shared batch template.
-\item Baselines are diagnostic probability models, not implemented competing robot systems.
-\item Ablations do not correspond to a trained model checkpoint.
-\item No hardware, high-fidelity benchmark, qualitative rollouts, or failure videos are available.
-\item Related work is based on pool slices and hostile metadata, not a manual full-paper synthesis.
-\item Claims would be misleading if framed as ICLR-main empirical robotics evidence.
+\item marginal single-sensor load,
+\item pairwise interaction load,
+\item delayed recovery state,
+\item false-isolation risk, and
+\item recovery-action utility.
 \end{itemize}
 
-\section{Hostile Prior-Work Pressure}
-The closest local hostile records include:
+The benchmark implements this mechanism as an executable diagnostic policy model rather than a trained neural checkpoint. That choice keeps the local evidence reproducible and RAM-light, but it is also the main reason the paper remains strong-revise rather than submission-ready.
+
+\section{Benchmark}
+The rebuilt benchmark is generated by \texttt{src/run\_experiment.py}. It stores aggregate CSVs rather than trajectories, so the full run remains lightweight without dropping experimental coverage.
+
+\paragraph{Tasks.}
+The tasks are grasp selection, insertion/alignment, deformable handling, mobile manipulation near obstacles, and tool-use contact control.
+
+\paragraph{Failure families.}
+The sensor-failure families are vision-only, tactile-only, proprioception-only, force-torque-only, depth-only, language-grounding-only, and compositional multi-sensor interaction.
+
+\paragraph{Splits.}
+The stress splits are nominal, single-sensor shift, paired-sensor shift, delayed sensor recovery, and combined stress.
+
+\paragraph{Methods.}
+The non-oracle baselines are a nominal multimodal policy, sensor-dropout augmentation, independent fault detectors, ensemble uncertainty gating, conformal sensor-reliability filtering, Bayesian sensor-fusion monitoring, and a robust single-worst-sensor policy. The benchmark also includes the proposed sensor-failure composition model and an oracle failure-aware policy.
+
+\paragraph{Metrics.}
+The evidence reports success, safety violation, damage, fault-detection F1, interaction-detection F1, false isolation, recovery latency, total cost, regret to oracle, paired seed differences, ablations, stress sweeps, and failure cases.
+
+\section{Results}
+\input{../results/combined_stress_table.tex}
+
+The strongest non-oracle baseline is \texttt{bayesian\_sensor\_fusion\_monitor}. On combined stress, the proposed model improves success by $0.063 \pm 0.009$, wins 7/7 paired seeds, lowers safety violation by $0.039$, and lowers damage by $0.025$. The oracle remains substantially better at $0.737 \pm 0.007$, which is a useful sanity check: the benchmark is not saturated.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/sensor_failure_combined_success.png}
+\caption{Combined-stress success with 95\% confidence intervals. The proposed model clears the strongest non-oracle baseline but remains below the oracle.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/sensor_failure_diagnostics.png}
+\caption{Diagnostic metrics. The proposed model's largest gain is interaction F1, which is the metric most directly tied to the compositional-failure hypothesis.}
+\end{figure}
+
+\input{../results/pairwise_decision_table.tex}
+
+\section{Ablations and stress tests}
+\input{../results/ablation_table.tex}
+
+The ablations are intentionally hostile. Removing conformal gating is the best removed-component variant, but it still trails the full model by $0.0206$ success and has worse safety. Removing pairwise interaction edges or cross-modal disagreement hurts interaction F1 sharply, which supports the claim that the model is not merely an uncertainty threshold.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/sensor_failure_ablation.png}
+\caption{Ablation success under combined stress. The full model remains above all removed-component variants.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/sensor_failure_stress_sweep.png}
+\caption{Stress sweep over multi-sensor interaction intensity. The proposed method remains above non-oracle baselines across the generated stress range, while the oracle remains the ceiling.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{../figures/sensor_failure_safety_regret.png}
+\caption{Safety and regret trade-off on combined stress. The proposed method improves success without paying a safety penalty relative to the strongest non-oracle baseline.}
+\end{figure}
+
+\section{Where the method still fails}
+The failure-case CSV shows that the weakest gains occur in mostly single-sensor regimes, especially vision-only or proprioception-only cases where a strong Bayesian fusion monitor can safely abstain or down-weight the failing channel. For example, tool-use contact control with vision-only failure slightly favors the strongest baseline by $0.0017$ success. These are not embarrassing failures; they define the intended boundary. Compositional modeling is valuable when interactions matter. It is unnecessary overhead when the right answer is a simple single-sensor fallback.
+
+\section{Hostile prior-work boundary}
+Sensor Dropout and masked modality training already demonstrate that policies can be made robust to missing sensors \citep{liu2017sensor,peri2024masked}. FINO-Net and related robot failure-detection work show that multimodal sensory streams can detect and classify manipulation failures \citep{inceoglu2024fino}. Conformal methods provide calibrated warning systems for unsafe robot behavior \citep{luo2024conformal}. PolyTouch and other tactile systems show that better contact sensing can make contact-rich policies more reliable \citep{zhao2025polytouch}. MoME-style expert routing shows that explicit modality routing can improve robustness under adverse sensor failures in autonomous driving \citep{park2025mome}.
+
+The present paper survives only under a narrower interpretation: it is about \emph{higher-order interaction failures} and recovery-action choice, not generic missing-modality robustness, generic anomaly detection, or better hardware. If real robot experiments later show that masked training, Bayesian fusion, or independent detectors match the proposed model on paired failures, the claim should be killed.
+
+\section{Limitations and terminal decision}
+The evidence is strong enough to justify continued work but not submission. The limitations are material:
 \begin{itemize}
-\item Red-Teaming Vision-Language-Action Models via Quality Diversity Prompt Generation for Robust Robot Policies (2026)
-\item When Vision Overrides Language: Evaluating and Mitigating Counterfactual Failures in VLAs (2026)
-\item Development of compositionality through interactive learning of language and action of robots (2025)
-\item PolyTouch: A Robust Multi-Modal Tactile Sensor for Contact-rich Manipulation Using Tactile-Diffusion Policies (2025)
-\item REFLEX Dataset: A Multimodal Dataset of Human Reactions to Robot Failures and Explanations (2025)
+\item the benchmark is local and synthetic;
+\item no real robot or independent high-fidelity simulator has been used;
+\item baselines are executable diagnostic models, not external trained robot systems;
+\item no learned policy checkpoint, training curve, or deployment video is provided;
+\item no external benchmark such as LIBERO, RLBench, Meta-World, BridgeData, or a hardware manipulation suite is reported.
 \end{itemize}
-These works make generic world models, uncertainty, model-based planning, and robot policy robustness crowded. Without real empirical evidence, the remaining novelty boundary is too weak for ICLR main.
 
-\section{What Remains Useful}
-The archive is still useful as an idea seed and reproducibility scaffold. The synthetic code, stress-test CSVs, reviewer attacks, and novelty-boundary docs can inform a future project. The correct next step is not more paper polishing; it is new evidence: implemented models, real baselines, manual related work, and robot or high-fidelity simulator validation.
+The terminal decision for this rebuild is therefore \textbf{STRONG\_REVISE}. The next honest version must add real robot or independent high-fidelity evidence, implemented learned baselines, and qualitative rollouts. Without that evidence, the paper should not be submitted to ICLR main.
 
-\section{Terminal Action}
-Decision: \textbf{KILL/ARCHIVE for ICLR main}. Do not submit this paper to ICLR main in the current form. Revival requires a substantially new empirical project.
+\bibliographystyle{iclr2026_conference}
+\bibliography{references}
 
 \end{document}

@@ -1,6 +1,8 @@
 # Claims
 
-- Mechanism claim: Sensor failure compositionality keeps action-critical alternatives explicit until a physical observation collapses them.
-- Evidence claim: the included synthetic experiment tests hidden physical-mode perturbations and compares observed-only, augmented-data, uncertainty, and proposed variants.
-- Scope claim: results support mechanism plausibility, not real-robot deployment.
-- Unsupported claim explicitly avoided: no claim of SOTA robot performance.
+- Mechanism claim: combined sensor failures can create non-additive robot-policy errors that are not captured by independent single-sensor fault models.
+- Method claim: a compositional failure graph over sensors and cross-modal disagreements can identify and recover from higher-order failure interactions.
+- Evidence claim: in the local benchmark, the proposed model beats the strongest non-oracle baseline by `0.063 +/- 0.009` combined-stress success and wins `7/7` paired seeds.
+- Safety claim: the proposed model lowers safety violation and damage relative to the strongest non-oracle baseline.
+- Scope claim: the evidence supports a strong-revise decision only; it does not establish real-robot deployment performance.
+- Unsupported claim explicitly avoided: no claim of ICLR-main readiness or state-of-the-art robot performance.

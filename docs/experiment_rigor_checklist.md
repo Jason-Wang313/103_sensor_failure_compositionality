@@ -1,19 +1,29 @@
 # Experiment Rigor Checklist
 
-## v2 Synthetic Rigor
-- [x] Multiple seeds.
-- [x] Error bars.
-- [x] Stronger synthetic baselines.
-- [x] Ablations.
-- [x] Stress tests.
-- [x] Negative cases.
+## v4 Local Evidence
 
-## ICLR Main Bar
+- [x] Paper-specific sensor-failure-compositionality benchmark.
+- [x] 5 robot task families.
+- [x] 7 sensor-failure families.
+- [x] 5 distribution/stress splits.
+- [x] 9 methods including oracle and strong non-oracle baselines.
+- [x] 7 random seeds.
+- [x] 84 episodes per group.
+- [x] Confidence intervals.
+- [x] Pairwise seed comparisons.
+- [x] Safety, damage, diagnostic, latency, cost, and regret metrics.
+- [x] Ablations for interaction edges, recovery memory, disagreement, conformal gating, and recovery action selection.
+- [x] Stress sweep over multi-sensor interaction intensity.
+- [x] Failure-case table.
+- [x] Generated figures and LaTeX tables.
+
+## Remaining ICLR-Main Gaps
+
 - [ ] Real-robot validation.
-- [ ] High-fidelity simulator benchmark.
-- [ ] Implemented learned model.
+- [ ] Independent high-fidelity simulator benchmark.
+- [ ] Implemented learned model checkpoints.
 - [ ] Implemented real competing baselines.
-- [ ] Manual related-work synthesis.
-- [ ] Paper-specific qualitative figures.
+- [ ] External benchmark comparison.
+- [ ] Deployment videos or qualitative rollouts.
 
-Decision: fail ICLR main empirical-rigor gate; archive.
+Decision: strong-revise. The local evidence is serious enough to continue, but not enough to submit.
