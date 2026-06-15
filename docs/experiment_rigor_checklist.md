@@ -1,6 +1,6 @@
 # Experiment Rigor Checklist
 
-## v4 Local Evidence
+## v4.1 Local Evidence
 
 - [x] Paper-specific sensor-failure-compositionality benchmark.
 - [x] 5 robot task families.
@@ -16,6 +16,8 @@
 - [x] Stress sweep over multi-sensor interaction intensity.
 - [x] Failure-case table.
 - [x] Generated figures and LaTeX tables.
+- [x] 2026-06-15 continuation rerun from source.
+- [x] v4.1 terminal audit.
 
 ## Remaining ICLR-Main Gaps
 

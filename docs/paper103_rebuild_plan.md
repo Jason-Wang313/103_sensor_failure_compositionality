@@ -67,3 +67,9 @@ Otherwise mark `KILL_ARCHIVE` with evidence.
 ## RAM Discipline
 
 Use vectorized or aggregate group simulation and write summary tables directly. Keep all seeds, tasks, families, methods, stress levels, ablations, and failure cases; do not reduce experimental coverage to save memory.
+
+## Continuation Result
+
+Re-audited: 2026-06-15 16:09:46 +0100
+
+The v4.1 continuation rerun recompiled and regenerated the benchmark from source. Terminal gate result remains STRONG_REVISE: proposed combined-stress success is `0.6071 +/- 0.0055` vs `0.5441 +/- 0.0064` for `bayesian_sensor_fusion_monitor`, paired gain is `0.0631 +/- 0.0088` with `7/7` seed wins, safety and damage improve, and all removed-component ablations remain below full. The paper is still not ICLR-main-ready without real robot or external high-fidelity validation.
