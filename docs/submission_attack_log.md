@@ -2,27 +2,27 @@
 
 Paper: 103 sensor_failure_compositionality
 
-This v4 pass rebuilds the archive into a paper-specific local evidence package. The result is `STRONG_REVISE`, not submit-as-is.
+This v4.1 pass re-audits the paper-specific local evidence package. The result is `STRONG_REVISE`, not submit-as-is.
 
 ## Attack 1: The result could be sensor dropout under a new name.
 
-Response: The benchmark includes a `sensor_dropout_augmentation` baseline. Under combined stress, it reaches `0.438 +/- 0.006` success, far below the proposed `0.607 +/- 0.006`.
+Response: The benchmark includes a `sensor_dropout_augmentation` baseline. Under combined stress, it reaches `0.4379 +/- 0.0056` success, far below the proposed `0.6071 +/- 0.0055`.
 
 ## Attack 2: Independent fault detectors may be enough.
 
-Response: `independent_fault_detectors` reaches `0.502 +/- 0.006` success and interaction F1 `0.267`; proposed reaches `0.607 +/- 0.006` and interaction F1 `0.560`.
+Response: `independent_fault_detectors` reaches `0.5025 +/- 0.0063` success and interaction F1 `0.2675`; proposed reaches `0.6071 +/- 0.0055` and interaction F1 `0.5596`.
 
 ## Attack 3: Bayesian fusion may already capture cross-sensor structure.
 
-Response: `bayesian_sensor_fusion_monitor` is the strongest non-oracle baseline at `0.544 +/- 0.006`. Proposed improves combined-stress success by `0.063 +/- 0.009` and wins `7/7` paired seeds.
+Response: `bayesian_sensor_fusion_monitor` is the strongest non-oracle baseline at `0.5441 +/- 0.0064`. Proposed improves combined-stress success by `0.0631 +/- 0.0088` and wins `7/7` paired seeds.
 
 ## Attack 4: The method may trade success for safety.
 
-Response: Proposed has lower safety violation (`0.196` vs `0.235`) and lower damage (`0.134` vs `0.159`) than the strongest non-oracle baseline.
+Response: Proposed has lower safety violation (`0.1960` vs `0.2345`) and lower damage (`0.1342` vs `0.1594`) than the strongest non-oracle baseline.
 
 ## Attack 5: A single component may carry the whole result.
 
-Response: The best removed-component ablation is `minus_conformal_gating` at `0.588 +/- 0.003`, still below the full model at `0.608 +/- 0.009`. Removing pairwise edges drops interaction F1 to `0.414`; removing cross-modal disagreement drops it to `0.403`.
+Response: The best removed-component ablation is `minus_conformal_gating` at `0.5876 +/- 0.0030`, still below the full model at `0.6082 +/- 0.0091`. Removing pairwise edges drops interaction F1 to `0.4140`; removing cross-modal disagreement drops it to `0.4033`.
 
 ## Attack 6: The claimed mechanism may fail under high interaction intensity.
 

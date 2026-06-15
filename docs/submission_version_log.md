@@ -23,3 +23,10 @@
 - Removed obsolete v3 outputs from the runner.
 - Rewrote the paper as a strong-revise evidence report with honest limitations.
 - Terminal decision: STRONG_REVISE.
+
+## v4.1 - Continuation Re-Audit
+
+- Added `docs/paper103_iclr_submission_execution_plan_20260615.md`.
+- Recompiled `src/run_experiment.py` and regenerated the benchmark from source.
+- Verified CSV coverage, strongest-baseline gate, pairwise seed statistics, stress sweep, ablations, failure cases, PDF rebuild path, and no-Desktop artifact rule.
+- Terminal decision remains STRONG_REVISE because local evidence passes all gates, but ICLR-main readiness remains `no` without real robot or external high-fidelity validation.

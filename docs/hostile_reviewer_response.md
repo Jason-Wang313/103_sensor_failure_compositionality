@@ -11,7 +11,7 @@ Paper: 103 Sensor Failure Compositionality
 
 ## ICLR Main Response
 
-The v4 rebuild narrows the novelty boundary to compositional failure interactions: cases where single-sensor robustness or independent fault detectors cannot explain the combined failure. The local benchmark supports that boundary: proposed combined-stress success is `0.607 +/- 0.006` versus `0.544 +/- 0.006` for the strongest non-oracle baseline, with lower safety violation and damage.
+The v4.1 rebuild narrows the novelty boundary to compositional failure interactions: cases where single-sensor robustness or independent fault detectors cannot explain the combined failure. The local benchmark supports that boundary: proposed combined-stress success is `0.6071 +/- 0.0055` versus `0.5441 +/- 0.0064` for the strongest non-oracle baseline, with lower safety violation and damage.
 
 ## Remaining Hostile Review
 

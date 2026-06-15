@@ -30,4 +30,5 @@
 - [ ] Trained policy checkpoints.
 - [ ] Real deployment videos.
 
-This repository reproduces a v4 strong-revise evidence package, not a finished ICLR-main submission.
+This repository reproduces a v4.1 strong-revise evidence package, not a finished ICLR-main submission.
+The 2026-06-15 v4.1 continuation rerun recompiled and regenerated the same evidence package from source; log: `C:/Users/wangz/robotics_massive_pool_paper_factory/logs/103_sensor_failure_compositionality_continuation_rerun_20260615.log`.

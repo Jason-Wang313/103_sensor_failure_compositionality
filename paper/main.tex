@@ -5,15 +5,17 @@
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{microtype}
 
 \title{Sensor Failure Compositionality for Multimodal Robot Policies}
 \author{Anonymous Authors}
 
 \begin{document}
+\raggedbottom
 \maketitle
 
 \begin{abstract}
-Multimodal robots are usually tested against missing or corrupted sensors one modality at a time. That is a weak deployment model: a blurred camera, drifting force-torque estimate, and delayed tactile recovery can combine into an error that is not predicted by any single-failure diagnostic. We rebuild Paper 103 around a falsifiable hypothesis: policies should represent \emph{sensor failure composition}, i.e., higher-order interactions between failed or unreliable modalities that change the recovery action. The resulting local benchmark covers 5 robot task families, 7 sensor-failure families, 5 stress splits, 9 methods, 7 seeds, and 84 episodes per group. On combined stress, the proposed compositional model obtains $0.607 \pm 0.006$ success versus $0.544 \pm 0.006$ for the strongest non-oracle baseline, while lowering safety violation from $0.235$ to $0.196$ and damage from $0.159$ to $0.134$. Pairwise tests favor the proposed method over the strongest baseline in 7/7 seeds, and ablations show that cross-sensor interaction edges, disagreement features, conformal gating, and recovery-action selection each matter. The terminal decision is \textbf{STRONG\_REVISE}: the local evidence supports the mechanism, but the paper is not ICLR-main-ready until validated on real robots or independent high-fidelity benchmarks.
+Multimodal robots are usually tested against missing or corrupted sensors one modality at a time. That is a weak deployment model: a blurred camera, drifting force-torque estimate, and delayed tactile recovery can combine into an error that is not predicted by any single-failure diagnostic. We rebuild and re-audit Paper 103 around a falsifiable hypothesis: policies should represent \emph{sensor failure composition}, i.e., higher-order interactions between failed or unreliable modalities that change the recovery action. The resulting local benchmark covers 5 robot task families, 7 sensor-failure families, 5 stress splits, 9 methods, 7 seeds, and 84 episodes per group. On the 2026-06-15 continuation rerun, the proposed compositional model obtains $0.6071 \pm 0.0055$ success versus $0.5441 \pm 0.0064$ for the strongest non-oracle baseline, while lowering safety violation from $0.2345$ to $0.1960$ and damage from $0.1594$ to $0.1342$. Pairwise tests favor the proposed method over the strongest baseline in 7/7 seeds, and ablations show that cross-sensor interaction edges, disagreement features, conformal gating, and recovery-action selection each matter. The terminal decision is \textbf{STRONG\_REVISE}: the local evidence supports the mechanism, but the paper is not ICLR-main-ready until validated on real robots or independent high-fidelity benchmarks.
 \end{abstract}
 
 \section{Why this paper exists}
@@ -54,7 +56,7 @@ The evidence reports success, safety violation, damage, fault-detection F1, inte
 \section{Results}
 \input{../results/combined_stress_table.tex}
 
-The strongest non-oracle baseline is \texttt{bayesian\_sensor\_fusion\_monitor}. On combined stress, the proposed model improves success by $0.063 \pm 0.009$, wins 7/7 paired seeds, lowers safety violation by $0.039$, and lowers damage by $0.025$. The oracle remains substantially better at $0.737 \pm 0.007$, which is a useful sanity check: the benchmark is not saturated.
+The strongest non-oracle baseline is \texttt{bayesian\_sensor\_fusion\_monitor}. On combined stress, the proposed model improves success by $0.0631 \pm 0.0088$, wins 7/7 paired seeds, lowers safety violation by $0.0385$, and lowers damage by $0.0253$. The oracle remains substantially better at $0.7368 \pm 0.0070$, which is a useful sanity check: the benchmark is not saturated.
 
 \begin{figure}[t]
 \centering
@@ -102,7 +104,7 @@ Sensor Dropout and masked modality training already demonstrate that policies ca
 The present paper survives only under a narrower interpretation: it is about \emph{higher-order interaction failures} and recovery-action choice, not generic missing-modality robustness, generic anomaly detection, or better hardware. If real robot experiments later show that masked training, Bayesian fusion, or independent detectors match the proposed model on paired failures, the claim should be killed.
 
 \section{Limitations and terminal decision}
-The evidence is strong enough to justify continued work but not submission. The limitations are material:
+The v4.1 evidence is strong enough to justify continued work but not submission. The limitations are material:
 \begin{itemize}
 \item the benchmark is local and synthetic;
 \item no real robot or independent high-fidelity simulator has been used;
