@@ -1,7 +1,9 @@
 # Plan
 
-Paper 103 v4.1 continuation audit executed from `docs/paper103_iclr_submission_execution_plan_20260615.md`.
+Paper 103 v5 expanded-standard rebuild is frozen in `docs/paper103_expanded_submission_plan_20260622.md`.
 
-Terminal result: STRONG_REVISE.
+Previous v4.1 terminal result: STRONG_REVISE.
 
-The local evidence remains positive: proposed success is `0.6071` vs `0.5441` for `bayesian_sensor_fusion_monitor`, paired gain is `0.0631 +/- 0.0088`, safety/damage improve, and ablations stay below full. The paper is still not submit-ready without real robot or external high-fidelity validation.
+Execution rule: run the frozen hostile-review v5 design before changing claims. The new target is a 25+ page manuscript backed by a larger CPU-only evaluation, stronger baselines, raw rollout persistence, ablations, stress sweeps, fixed-risk deployment budgets, negative cases, bright boxed clickable citations, Downloads-only PDF placement, public GitHub verification, and root-ledger updates.
+
+Terminal honesty rule: keep `ICLR main ready: no` unless real robot, accepted high-fidelity, external benchmark, calibrated sensor-failure log, trained-checkpoint, or rollout-video evidence exists.

@@ -2,21 +2,26 @@
 
 Paper: 103 sensor_failure_compositionality
 
-Previous v3 decision: KILL_ARCHIVE
+Previous v4.1 decision: STRONG_REVISE
 
-v4.1 gate verdict: STRONG_REVISE
+v5 gate verdict: STRONG_REVISE
 
-Evidence digest: 5 tasks x 7 failure families x 5 splits x 9 methods x 7 seeds x 84 episodes/group.
+Evidence digest: 6 tasks x 8 sensor-failure regimes x 8 splits x 15 methods x 10 seeds x 6 episodes/cell.
 
 Gate outcomes:
 
-- Success gate: pass. Proposed combined-stress success exceeds the strongest non-oracle baseline by `0.0631 +/- 0.0088`.
-- Safety gate: pass. Safety violation and damage are lower than the strongest non-oracle baseline by `0.0385` and `0.0253`.
-- Diagnostic gate: pass. Interaction F1 improves by `0.2921` over independent fault detectors and latency improves by `0.2394`.
-- Pairwise gate: pass. Proposed beats the strongest non-oracle baseline in `7/7` seeds.
-- Ablation gate: pass. The full model beats the best removed-component ablation by `0.0206`.
-- Continuation rerun gate: pass.
+- Success gate: pass. V5 hard-aggregate success exceeds the strongest non-oracle baseline by `0.09314`.
+- Safety gate: pass. V5 safety violation `0.13785` is below the strongest non-oracle reference `0.18047`.
+- Damage gate: pass. V5 damage `0.05868` is below the strongest non-oracle reference `0.09010`.
+- Diagnostic gate: pass. V5 interaction F1 `0.68394` improves over independent fault detectors `0.23125`.
+- Calibration gate: pass. V5 ECE is `0.00206`.
+- Utility gate: pass. V5 utility is `0.47673`.
+- Pairwise gate: pass. V5 beats every non-oracle baseline in paired hard-seed comparisons.
+- Ablation gate: pass. Full v5 beats the closest removed-component variant.
+- Stress gate: pass. V5 remains above the strongest non-oracle reference at maximum stress.
+- Fixed-risk gate: pass. Strict fixed-risk v5 coverage is `0.54896` and utility is `0.23085`.
+- Scope gate: fail. No real robot, accepted high-fidelity benchmark, external multimodal-sensing benchmark, calibrated real sensor-failure logs, trained checkpoints, or rollout videos exist.
 
 Terminal decision: STRONG_REVISE.
 
-Submission status: not ICLR-main-ready until real robot or independent high-fidelity validation is added.
+Submission status: not ICLR-main-ready until external validation is added.

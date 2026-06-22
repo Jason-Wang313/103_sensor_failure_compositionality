@@ -2,44 +2,44 @@
 
 Paper: 103 sensor_failure_compositionality
 
-This v4.1 pass re-audits the paper-specific local evidence package. The result is `STRONG_REVISE`, not submit-as-is.
+This v5 pass re-audits the paper-specific local evidence package. The result is `STRONG_REVISE`, not submit-as-is.
 
 ## Attack 1: The result could be sensor dropout under a new name.
 
-Response: The benchmark includes a `sensor_dropout_augmentation` baseline. Under combined stress, it reaches `0.4379 +/- 0.0056` success, far below the proposed `0.6071 +/- 0.0055`.
+Response: The benchmark includes both `sensor_dropout_augmentation` and `sensor_dropout_transformer_policy`. On the hard aggregate, they reach success `0.44852` and `0.59002`, below v5 at `0.79262`.
 
 ## Attack 2: Independent fault detectors may be enough.
 
-Response: `independent_fault_detectors` reaches `0.5025 +/- 0.0063` success and interaction F1 `0.2675`; proposed reaches `0.6071 +/- 0.0055` and interaction F1 `0.5596`.
+Response: `independent_fault_detectors` reaches success `0.51372` and interaction F1 `0.23125`; v5 reaches success `0.79262` and interaction F1 `0.68394`.
 
 ## Attack 3: Bayesian fusion may already capture cross-sensor structure.
 
-Response: `bayesian_sensor_fusion_monitor` is the strongest non-oracle baseline at `0.5441 +/- 0.0064`. Proposed improves combined-stress success by `0.0631 +/- 0.0088` and wins `7/7` paired seeds.
+Response: `bayesian_sensor_fusion_monitor` reaches success `0.60677`, safety violation `0.21406`, damage `0.12083`, and utility `0.05099`. V5 reaches success `0.79262`, safety violation `0.13785`, damage `0.05868`, and utility `0.47673`.
 
-## Attack 4: The method may trade success for safety.
+## Attack 4: The v4 composition rule set may already solve the problem.
 
-Response: Proposed has lower safety violation (`0.1960` vs `0.2345`) and lower damage (`0.1342` vs `0.1594`) than the strongest non-oracle baseline.
+Response: `proposed_sensor_failure_composition_v4` is the strongest non-oracle success reference at `0.69948 +/- 0.00846`. V5 improves hard success by `0.09314`, reduces safety violation and damage, and improves utility from `0.25851` to `0.47673`.
 
-## Attack 5: A single component may carry the whole result.
+## Attack 5: The method may trade success for safety.
 
-Response: The best removed-component ablation is `minus_conformal_gating` at `0.5876 +/- 0.0030`, still below the full model at `0.6082 +/- 0.0091`. Removing pairwise edges drops interaction F1 to `0.4140`; removing cross-modal disagreement drops it to `0.4033`.
+Response: V5 improves both success and safety relative to the strongest non-oracle reference: safety violation is `0.13785` versus `0.18047`, and damage is `0.05868` versus `0.09010`.
 
-## Attack 6: The claimed mechanism may fail under high interaction intensity.
+## Attack 6: A single component may carry the whole result.
 
-Response: The stress sweep is included in `results/stress_sweep.csv` and `figures/sensor_failure_stress_sweep.png`. Proposed remains above non-oracle baselines across the generated multi-sensor interaction stress sweep, while the oracle remains higher.
+Response: The closest removed-component ablation is `no_false_alarm_suppression` at success `0.73863` and utility `0.36739`, below full v5 at success `0.79089` and utility `0.47612`. Removing pairwise interaction edges drops interaction F1 to `0.39887`; removing cross-modal disagreement drops interaction F1 to `0.40234`.
 
-## Attack 7: The evaluation is still not real robotics evidence.
+## Attack 7: The claimed mechanism may fail under high interaction intensity.
+
+Response: At maximum stress, v5 reaches success `0.76389`, above the strongest non-oracle reference `0.65972`, while the oracle remains higher at `0.86597`.
+
+## Attack 8: Fixed-risk deployment may collapse.
+
+Response: Strict fixed-risk v5 coverage is `0.54896`, success is `0.42153`, safety violation is `0.02222`, damage is `0.00833`, and utility is `0.23085`. Coverage is reported because abstention is not counted as success.
+
+## Attack 9: The evaluation is still not real robotics evidence.
 
 Response: Correct. The terminal decision is `STRONG_REVISE`, not ICLR-ready. The manuscript explicitly states that real robot or independent high-fidelity simulator validation is required before submission.
 
-## Attack 8: Tables and figures could be stale from v3.
-
-Response: The v4 runner deletes obsolete v3 files (`raw_seed_metrics.csv`, `negative_cases.csv`, and `figures/stress_curve_data.csv`) before generating the new outputs. Current CSVs passed a finite-value audit.
-
-## Attack 9: The benchmark might be too narrow.
-
-Response: The local benchmark spans 5 tasks, 7 failure families, 5 splits, 9 methods, 7 seeds, and 84 episodes/group. This is adequate for a strong-revise local evidence package but not enough to replace external validation.
-
 ## Attack 10: Can this be submitted now?
 
-Response: No. The correct action is strong revise with external robot/high-fidelity experiments and implemented learned baselines.
+Response: No. The correct action is strong revise with external robot/high-fidelity experiments, calibrated real sensor-failure logs, trained checkpoints, rollout videos, and implemented learned baselines.
