@@ -30,3 +30,12 @@
 - Recompiled `src/run_experiment.py` and regenerated the benchmark from source.
 - Verified CSV coverage, strongest-baseline gate, pairwise seed statistics, stress sweep, ablations, failure cases, PDF rebuild path, and no-Desktop artifact rule.
 - Terminal decision remains STRONG_REVISE because local evidence passes all gates, but ICLR-main readiness remains `no` without real robot or external high-fidelity validation.
+
+## v5 - Expanded-Standard Submission Rebuild
+
+- Added `docs/paper103_expanded_submission_plan_20260622.md`.
+- Replaced the v4.1 aggregate-only runner with a streaming v5 runner.
+- Expanded coverage to 6 tasks, 8 sensor-failure regimes, 8 splits, 15 methods, 10 seeds, 345,600 main rollouts, 115,200 ablation rollouts, 288,000 stress rollouts, 276,480 fixed-risk rollouts, and 24 negative cases.
+- Added generated manuscript and artifact validator scripts.
+- Generated a 29-page PDF with bright boxed clickable citations and 230 bibliography entries.
+- Terminal decision remains STRONG_REVISE because all local empirical gates pass, but ICLR-main readiness remains `no` without real robot or external validation evidence.

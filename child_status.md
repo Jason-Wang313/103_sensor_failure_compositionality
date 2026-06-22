@@ -1,11 +1,12 @@
 # Child Status 103
 
-Current stage: ICLR-main-target evidence rebuild terminal
-Last update: 2026-06-15 16:09:46 +0100
+Current stage: expanded-standard v5 evidence rebuild terminal
+Last update: 2026-06-22 14:55:00 +08:00
 PDF: C:/Users/wangz/Downloads/103.pdf
-PDF SHA256: F37A503FD776D95D59C71C6CD3A70C48B14539BDB2A6CACE426C141281B6606E
+PDF pages: 29
+PDF SHA256: D63730CDB03544C6ABF6F5453B41C91A472CE94EBDBF964D841F215EB7319E83
 GitHub: https://github.com/Jason-Wang313/103_sensor_failure_compositionality
-Submission-hardening version: v4.1
+Submission-hardening version: v5-expanded
 Terminal decision: STRONG_REVISE
 ICLR main ready: no
-Reason not ready: v4.1 local benchmark evidence is positive, but real-robot or independent high-fidelity validation is still missing.
+Reason not ready: all frozen local empirical gates pass, but the scope gate fails because no real robot study, accepted high-fidelity benchmark, external multimodal-sensing benchmark, calibrated real sensor-failure logs, trained checkpoints, or rollout videos exist.

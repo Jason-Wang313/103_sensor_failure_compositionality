@@ -1,49 +1,97 @@
-Paper 103 sensor_failure_compositionality evidence rebuild
-Design: 5 tasks x 7 sensor-failure families x 5 splits x 9 methods, 7 seeds, 84 episodes/group.
+Paper 103: sensor_failure_compositionality expanded v5 evidence audit
 Terminal decision: STRONG_REVISE
-Rationale: local sensor-failure-composition evidence supports the mechanism, but real robot/external validation is missing
+ICLR main ready: no
+Design: 6 tasks x 8 sensor-failure regimes x 8 splits x 15 methods, 10 seeds, 6 episodes per seed/task/regime/split/method cell.
+Claim under test: risk-calibrated sensor failure composition should improve hard multimodal robot sensing beyond independent detectors, Bayesian fusion, learned latent classifiers, dropout-trained policies, mixture-of-experts routing, and robust single-sensor fallback.
 
-Combined-stress ranking:
-oracle_failure_aware_policy: success=0.737 +/- 0.007, viol=0.152, damage=0.100, fault_f1=0.638, interaction_f1=0.676, false_iso=0.034, latency=0.511, regret=0.000
-proposed_sensor_failure_composition_model: success=0.607 +/- 0.006, viol=0.196, damage=0.134, fault_f1=0.493, interaction_f1=0.560, false_iso=0.162, latency=0.620, regret=0.130
-bayesian_sensor_fusion_monitor: success=0.544 +/- 0.006, viol=0.235, damage=0.159, fault_f1=0.452, interaction_f1=0.370, false_iso=0.259, latency=0.767, regret=0.193
-ensemble_uncertainty_gating: success=0.503 +/- 0.010, viol=0.237, damage=0.153, fault_f1=0.390, interaction_f1=0.282, false_iso=0.365, latency=0.827, regret=0.233
-robust_single_worst_sensor_policy: success=0.503 +/- 0.005, viol=0.218, damage=0.133, fault_f1=0.428, interaction_f1=0.297, false_iso=0.373, latency=0.815, regret=0.234
-independent_fault_detectors: success=0.502 +/- 0.006, viol=0.262, damage=0.175, fault_f1=0.435, interaction_f1=0.267, false_iso=0.327, latency=0.860, regret=0.234
-conformal_sensor_reliability_filter: success=0.501 +/- 0.004, viol=0.230, damage=0.143, fault_f1=0.399, interaction_f1=0.300, false_iso=0.402, latency=0.833, regret=0.236
-sensor_dropout_augmentation: success=0.438 +/- 0.006, viol=0.274, damage=0.191, fault_f1=0.320, interaction_f1=0.195, false_iso=0.247, latency=0.883, regret=0.299
-nominal_multimodal_policy: success=0.377 +/- 0.007, viol=0.283, damage=0.196, fault_f1=0.207, interaction_f1=0.143, false_iso=0.218, latency=0.924, regret=0.360
+Row counts:
+- ablation_metric_rows: 10
+- ablation_rollout_rows: 115200
+- ablation_seed_rows: 100
+- dataset_summary_rows: 3840
+- failure_case_rows: 24
+- fixed_risk_metric_rows: 48
+- fixed_risk_pairwise_rows: 44
+- fixed_risk_rows: 276480
+- fixed_risk_seed_rows: 480
+- hard_metric_rows: 15
+- hard_pairwise_rows: 14
+- hard_seed_rows: 150
+- main_group_rows: 57600
+- main_metric_rows: 120
+- main_rollout_rows: 345600
+- main_seed_metric_rows: 150
+- stress_metric_rows: 100
+- stress_rollout_rows: 288000
+- stress_seed_rows: 1000
+
+Hard-aggregate evidence:
+- oracle_failure_aware_policy: success=0.88273 +/- 0.00493, safety=0.12023, damage=0.04627, fault_f1=0.68203, interaction_f1=0.77005, missed=0.04123, false_iso=0.00269, latency=0.36941, ece=0.00200, regret=0.00000, utility=0.62899
+- risk_calibrated_sensor_composition_v5: success=0.79262 +/- 0.01063, safety=0.13785, damage=0.05868, fault_f1=0.60017, interaction_f1=0.68394, missed=0.09913, false_iso=0.00530, latency=0.44258, ece=0.00206, regret=0.08714, utility=0.47673
+- proposed_sensor_failure_composition_v4: success=0.69948 +/- 0.00846, safety=0.18047, damage=0.09010, fault_f1=0.53889, interaction_f1=0.55998, missed=0.16233, false_iso=0.06502, latency=0.54673, ece=0.02757, regret=0.19285, utility=0.25851
+- risk_aware_sensor_reconfiguration: success=0.65382 +/- 0.00747, safety=0.18177, damage=0.08845, fault_f1=0.49089, interaction_f1=0.46285, missed=0.20608, false_iso=0.08594, latency=0.59342, ece=0.02452, regret=0.23506, utility=0.18443
+- multimodal_mixture_of_experts_router: success=0.63472 +/- 0.00837, safety=0.21181, damage=0.11293, fault_f1=0.49219, interaction_f1=0.46163, missed=0.22717, false_iso=0.10078, latency=0.63824, ece=0.05634, regret=0.25693, utility=0.09408
+- causal_sensor_graph_monitor: success=0.62700 +/- 0.00851, safety=0.20790, damage=0.11536, fault_f1=0.47569, interaction_f1=0.51050, missed=0.20981, false_iso=0.09358, latency=0.63786, ece=0.04626, regret=0.25550, utility=0.09729
+- learned_latent_failure_classifier: success=0.61814 +/- 0.00794, safety=0.22231, damage=0.13247, fault_f1=0.49010, interaction_f1=0.47778, missed=0.21207, false_iso=0.10087, latency=0.66649, ece=0.05936, regret=0.26633, utility=0.05014
+- bayesian_sensor_fusion_monitor: success=0.60677 +/- 0.00888, safety=0.21406, damage=0.12083, fault_f1=0.48793, interaction_f1=0.42248, missed=0.22804, false_iso=0.10938, latency=0.68351, ece=0.03782, regret=0.28355, utility=0.05099
+- sensor_dropout_transformer_policy: success=0.59002 +/- 0.00604, safety=0.22795, damage=0.12014, fault_f1=0.48993, interaction_f1=0.40816, missed=0.24974, false_iso=0.10833, latency=0.68255, ece=0.06937, regret=0.28598, utility=0.00851
+- conformal_sensor_reliability_filter: success=0.53941 +/- 0.01076, safety=0.19358, damage=0.11563, fault_f1=0.40833, interaction_f1=0.29766, missed=0.26432, false_iso=0.07127, latency=0.76741, ece=0.01314, regret=0.34077, utility=-0.00925
+- robust_single_worst_sensor_policy: success=0.52899 +/- 0.01012, safety=0.20608, damage=0.11415, fault_f1=0.43568, interaction_f1=0.26406, missed=0.29809, false_iso=0.14097, latency=0.76646, ece=0.09033, regret=0.35665, utility=-0.06505
+- ensemble_uncertainty_gating: success=0.52439 +/- 0.00873, safety=0.23108, damage=0.14167, fault_f1=0.38646, interaction_f1=0.29332, missed=0.30139, false_iso=0.12509, latency=0.75908, ece=0.08140, regret=0.35476, utility=-0.10952
+- independent_fault_detectors: success=0.51372 +/- 0.00782, safety=0.25946, damage=0.16128, fault_f1=0.44097, interaction_f1=0.23125, missed=0.27648, false_iso=0.13776, latency=0.80769, ece=0.10748, regret=0.36760, utility=-0.16759
+- sensor_dropout_augmentation: success=0.44852 +/- 0.00893, safety=0.28247, damage=0.18073, fault_f1=0.30972, interaction_f1=0.17309, missed=0.38498, false_iso=0.17274, latency=0.85042, ece=0.12313, regret=0.44577, utility=-0.32088
+- nominal_multimodal_policy: success=0.34193 +/- 0.00858, safety=0.31285, damage=0.20894, fault_f1=0.16059, interaction_f1=0.07587, missed=0.45052, false_iso=0.20113, latency=0.94101, ece=0.15343, regret=0.55002, utility=-0.52292
+
+Reference winners:
+- best_success_reference=proposed_sensor_failure_composition_v4
+- best_utility_reference=proposed_sensor_failure_composition_v4
+- best_removed_success_ablation=no_false_alarm_suppression
+- best_removed_utility_ablation=no_false_alarm_suppression
+- max_stress_reference=proposed_sensor_failure_composition_v4
+- fixed_risk_reference=proposed_sensor_failure_composition_v4
+- v5_success=0.79262
+- v5_safety_violation=0.13785
+- v5_damage=0.05868
+- v5_fault_f1=0.60017
+- v5_interaction_f1=0.68394
+- v5_missed_fault=0.09913
+- v5_false_isolation=0.00530
+- v5_recovery_latency=0.44258
+- v5_ece=0.00206
+- v5_regret=0.08714
+- v5_utility=0.47673
+- oracle_success=0.88273
 
 Gate outcomes:
-success_gate: True
-safety_gate: True
-diagnostic_gate: True
-pairwise_gate: True
-ablation_gate: True
-success_margin_vs_strongest: 0.06307094266277935
-safety_violation_delta_vs_strongest: -0.03853255587949467
-damage_delta_vs_strongest: -0.025267249757045668
-interaction_f1_delta_vs_independent_faults: 0.29212827988338197
-recovery_latency_delta_vs_independent_faults: -0.23939874667715333
-ablation_margin_vs_best_removed_component: 0.02055393586005838
-strongest_non_oracle_baseline: bayesian_sensor_fusion_monitor
-best_removed_component: minus_conformal_gating
+- success_gate: True
+- safety_gate: True
+- damage_gate: True
+- diagnostic_gate: True
+- calibration_gate: True
+- utility_gate: True
+- pairwise_gate: True
+- ablation_gate: True
+- stress_gate: True
+- fixed_risk_gate: True
+- scope_gate: False
 
-Pairwise proposed comparisons:
-bayesian_sensor_fusion_monitor: diff=0.063 +/- 0.009, wins=7/7, decision=proposed_better
-conformal_sensor_reliability_filter: diff=0.106 +/- 0.006, wins=7/7, decision=proposed_better
-ensemble_uncertainty_gating: diff=0.104 +/- 0.011, wins=7/7, decision=proposed_better
-independent_fault_detectors: diff=0.105 +/- 0.009, wins=7/7, decision=proposed_better
-nominal_multimodal_policy: diff=0.230 +/- 0.008, wins=7/7, decision=proposed_better
-oracle_failure_aware_policy: diff=-0.130 +/- 0.008, wins=0/7, decision=not_decisive
-robust_single_worst_sensor_policy: diff=0.105 +/- 0.005, wins=7/7, decision=proposed_better
-sensor_dropout_augmentation: diff=0.169 +/- 0.010, wins=7/7, decision=proposed_better
+Terminal rationale:
+- all frozen local empirical gates pass; terminal state remains STRONG_REVISE only because scope/external-validation evidence is missing
+- scope gate fails because no real robot study, accepted high-fidelity benchmark, external multimodal-sensing benchmark, calibrated real sensor-failure logs, trained checkpoints, or rollout videos exist
 
-Ablations:
-full_sensor_failure_composition_model: success=0.608 +/- 0.009, viol=0.195, damage=0.129, interaction_f1=0.559, note=all components
-minus_conformal_gating: success=0.588 +/- 0.003, viol=0.224, damage=0.157, interaction_f1=0.531, note=removes reliability gating
-minus_recovery_action_selection: success=0.570 +/- 0.006, viol=0.229, damage=0.152, interaction_f1=0.497, note=detects faults but does not choose recovery actions
-minus_temporal_recovery_memory: success=0.558 +/- 0.009, viol=0.225, damage=0.146, interaction_f1=0.490, note=forgets delayed recovery state
-minus_pairwise_interaction_edges: success=0.558 +/- 0.007, viol=0.215, damage=0.143, interaction_f1=0.414, note=removes cross-sensor interaction edges
-minus_cross_modal_disagreement: success=0.548 +/- 0.006, viol=0.220, damage=0.144, interaction_f1=0.403, note=removes disagreement features
-independent_faults_only: success=0.507 +/- 0.004, viol=0.256, damage=0.176, interaction_f1=0.279, note=independent single-sensor detectors only
+Ablation summary:
+- full_risk_calibrated_sensor_composition_v5: success=0.79089, safety=0.13620, damage=0.05964, interaction_f1=0.68576, utility=0.47612, note=all components
+- no_false_alarm_suppression: success=0.73863, safety=0.15130, damage=0.07083, interaction_f1=0.65738, utility=0.36739, note=removes false-alarm suppression
+- no_conformal_calibration: success=0.72318, safety=0.18056, damage=0.08238, interaction_f1=0.64323, utility=0.29692, note=removes risk calibration
+- no_active_repair: success=0.71997, safety=0.16562, damage=0.07413, interaction_f1=0.65130, utility=0.32875, note=removes active repair
+- no_temporal_recovery_memory: success=0.71597, safety=0.16719, damage=0.08715, interaction_f1=0.59193, utility=0.29891, note=forgets delayed recovery state
+- no_recovery_action_selection: success=0.71102, safety=0.17795, damage=0.09644, interaction_f1=0.63898, utility=0.26633, note=detects failures but does not choose recovery actions
+- v4_composition_rules: success=0.69436, safety=0.18168, damage=0.09653, interaction_f1=0.56563, utility=0.24491, note=prior v4 rule proxy
+- no_pairwise_interaction_edges: success=0.68099, safety=0.14870, damage=0.07569, interaction_f1=0.39887, utility=0.30177, note=removes cross-sensor interaction edges
+- no_cross_modal_disagreement: success=0.64991, safety=0.16918, damage=0.08099, interaction_f1=0.40234, utility=0.22156, note=removes disagreement evidence
+- bayesian_fusion_only: success=0.59358, safety=0.20495, damage=0.12752, interaction_f1=0.41467, utility=0.04243, note=strong Bayesian-fusion reference
+
+Fixed-risk strict v5: coverage=0.54896, success=0.42153, safety=0.02222, damage=0.00833, false_iso=0.29167, utility=0.23085
+
+No human-subject, hardware, or external high-fidelity validation is claimed; this is a local CPU-only executable surrogate audit.
+terminal=STRONG_REVISE

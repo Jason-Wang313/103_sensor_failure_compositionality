@@ -1,23 +1,24 @@
 # Experiment Rigor Checklist
 
-## v4.1 Local Evidence
+## v5 Local Evidence
 
 - [x] Paper-specific sensor-failure-compositionality benchmark.
-- [x] 5 robot task families.
-- [x] 7 sensor-failure families.
-- [x] 5 distribution/stress splits.
-- [x] 9 methods including oracle and strong non-oracle baselines.
-- [x] 7 random seeds.
-- [x] 84 episodes per group.
+- [x] 6 robot task families.
+- [x] 8 sensor-failure regimes.
+- [x] 8 distribution/stress splits.
+- [x] 15 methods including oracle and strong non-oracle baselines.
+- [x] 10 random seeds.
+- [x] Raw main rollout persistence: 345,600 rows.
 - [x] Confidence intervals.
 - [x] Pairwise seed comparisons.
-- [x] Safety, damage, diagnostic, latency, cost, and regret metrics.
-- [x] Ablations for interaction edges, recovery memory, disagreement, conformal gating, and recovery action selection.
-- [x] Stress sweep over multi-sensor interaction intensity.
-- [x] Failure-case table.
+- [x] Safety, damage, fault-F1, interaction-F1, missed-fault, false-isolation, latency, ECE, regret, and utility metrics.
+- [x] Ablations for pairwise edges, recovery memory, disagreement, calibration, recovery action selection, active repair, false-alarm suppression, v4 rules, and Bayesian fusion.
+- [x] Stress sweep over interaction, desynchronization, false-alarm, drift, and recovery-delay pressure.
+- [x] Fixed-risk deployment budgets with coverage.
+- [x] Failure-case table with 24 negative cases.
 - [x] Generated figures and LaTeX tables.
-- [x] 2026-06-15 continuation rerun from source.
-- [x] v4.1 terminal audit.
+- [x] 2026-06-22 full rerun from source.
+- [x] 29-page validated PDF with bright boxed citations.
 
 ## Remaining ICLR-Main Gaps
 
